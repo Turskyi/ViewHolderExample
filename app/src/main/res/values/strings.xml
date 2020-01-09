@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">ViewHolderExample</string>
+    <string name="action_reset">Reset</string>
+    <string name="viewHolder_index">ViewHolder index: %1$d</string>
+</resources>
