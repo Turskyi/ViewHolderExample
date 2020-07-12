@@ -9,7 +9,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
-class MainActivity : AppCompatActivity(), GreenAdapter.ListItemClickListener {
+class MainActivity : AppCompatActivity(R.layout.activity_main), GreenAdapter.ListItemClickListener {
+    companion object {
+        private const val NUM_LIST_ITEMS = 100
+    }
     /*
      * References to RecyclerView and Adapter to reset the list to its
      * "pretty" state when the reset menu item is clicked.
@@ -19,7 +22,6 @@ class MainActivity : AppCompatActivity(), GreenAdapter.ListItemClickListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
         /*
          * Using findViewById, we get a reference to our RecyclerView from xml. This allows us to
          * do things like set the adapter of the RecyclerView and toggle the visibility.
@@ -33,15 +35,15 @@ class MainActivity : AppCompatActivity(), GreenAdapter.ListItemClickListener {
          * the LinearLayoutManager constructor.
          */
         val layoutManager = LinearLayoutManager(this)
-        mNumbersList!!.layoutManager = layoutManager
+        mNumbersList?.layoutManager = layoutManager
         /*
          * Use this setting to improve performance if you know that changes in content do not
          * change the child layout size in the RecyclerView
-         */mNumbersList!!.setHasFixedSize(true)
+         */mNumbersList?.setHasFixedSize(true)
         /*
          * The GreenAdapter is responsible for displaying each item in the list.
          */mAdapter = GreenAdapter(NUM_LIST_ITEMS, this)
-        mNumbersList!!.adapter = mAdapter
+        mNumbersList?.adapter = mAdapter
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -50,11 +52,10 @@ class MainActivity : AppCompatActivity(), GreenAdapter.ListItemClickListener {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        val itemId = item.itemId
-        when (itemId) {
+        when (item.itemId) {
             R.id.action_refresh -> {
                 mAdapter = GreenAdapter(NUM_LIST_ITEMS, this)
-                mNumbersList!!.adapter = mAdapter
+                mNumbersList?.adapter = mAdapter
                 return true
             }
         }
@@ -79,9 +80,5 @@ class MainActivity : AppCompatActivity(), GreenAdapter.ListItemClickListener {
             mToast.cancel()
         }
         mToast.show()
-    }
-
-    companion object {
-        private const val NUM_LIST_ITEMS = 100
     }
 }
